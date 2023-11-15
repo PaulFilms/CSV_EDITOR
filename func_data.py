@@ -32,3 +32,4 @@ class WG:
     BTN_SAVE: QPushButton
     TBL_DATA: QTableWidget
     BTN_FIELDS: QPushButton
+    BTN_ADD: QPushButton

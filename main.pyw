@@ -51,9 +51,11 @@ class MAIN_WINDOW(QMainWindow):
         WG.BTN_SAVE: QPushButton = self.btn_save
         WG.TBL_DATA: QTableWidget = self.tbl_data
         WG.BTN_FIELDS: QPushButton = self.btn_fields
+        WG.BTN_ADD: QPushButton = self.btn_add
         # 
         WG.BTN_SAVE.clicked.connect(self.SAVE)
         WG.BTN_FIELDS.clicked.connect(self.FIELDS)
+        WG.BTN_ADD.clicked.connect(self.ROW_ADD)
     
     def LOAD(self):
         '''
@@ -71,8 +73,12 @@ class MAIN_WINDOW(QMainWindow):
             if field not in fields:
                 tbl_data[field] = None
         QT.TBL_POP_PANDAS_DF(WG.TBL_DATA, tbl_data)
-        print(field)
-    
+
+    def ROW_ADD(self):
+        '''
+        '''
+        WG.TBL_DATA.setRowCount(WG.TBL_DATA.rowCount()+1)
+
     def SAVE(self):
         '''
         '''
