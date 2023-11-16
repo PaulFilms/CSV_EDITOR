@@ -35,3 +35,4 @@ class WG:
     BTN_FIELDS: QPushButton
     BTN_ADD: QPushButton
     BTN_DUPLICATE: QPushButton
+    BTN_DEL: QPushButton

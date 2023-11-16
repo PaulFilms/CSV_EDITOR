@@ -66,12 +66,14 @@ class MAIN_WINDOW(QMainWindow):
         WG.BTN_FIELDS: QPushButton = self.btn_fields
         WG.BTN_ADD: QPushButton = self.btn_add
         WG.BTN_DUPLICATE: QPushButton = self.btn_duplicate
+        WG.BTN_DEL: QPushButton = self.btn_del
         # 
         WG.BTN_LOAD.clicked.connect(self.LOAD)
         WG.BTN_SAVE.clicked.connect(self.SAVE)
         WG.BTN_FIELDS.clicked.connect(self.FIELDS)
         WG.BTN_ADD.clicked.connect(self.ROW_ADD)
         WG.BTN_DUPLICATE.clicked.connect(self.ROW_DUPLICATE)
+        WG.BTN_DEL.clicked.connect(self.ROW_DEL)
     
     def LOAD(self):
         '''
@@ -116,7 +118,11 @@ class MAIN_WINDOW(QMainWindow):
     def ROW_DEL(self):
         '''
         '''
-        print("ROW_DEL")
+        currentRow = WG.TBL_DATA.currentRow()
+        if currentRow < 0:
+            QT.INFOBOX("ATTENTIONS", "PLEASE, SELECT A VALID ROW")
+            return
+        WG.TBL_DATA.removeRow(currentRow)
 
     def SAVE(self):
         '''
