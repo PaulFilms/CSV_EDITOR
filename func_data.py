@@ -11,7 +11,7 @@ __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 
 ''' SYSTEM LIBRARIES '''
 from dataclasses import dataclass, asdict, fields
-from PyQt6.QtWidgets import QPushButton, QTableWidget
+from PyQt6.QtWidgets import QPushButton, QTableWidget, QLineEdit
 
 ''' CUSTOM MAIN LIBRARIES '''
 
@@ -28,8 +28,10 @@ class WG:
     All widgets used in the app
     '''
     ## DEVICES
-    BTN_OPEN: QPushButton
+    BTN_LOAD: QPushButton
     BTN_SAVE: QPushButton
+    TX_FILENAME: QLineEdit
     TBL_DATA: QTableWidget
     BTN_FIELDS: QPushButton
     BTN_ADD: QPushButton
+    BTN_DUPLICATE: QPushButton
