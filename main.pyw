@@ -6,7 +6,7 @@
 \n
 `WARNINGS:`
 '''
-__version__ = '2023.11.15'
+__version__ = '2023.11.17'
 __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 __appName__ = 'CSV EDITOR'
 
@@ -16,8 +16,7 @@ import pandas as pd
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog
 from PyQt6.QtWidgets import QPushButton, QTableWidget, QLineEdit
-from PyQt6.QtCore import QUrl
-from PyQt6.QtGui import QIcon, QDesktopServices
+from PyQt6.QtGui import QIcon
 
 ''' CUSTOM MAIN LIBRARIES '''
 import pydeveloptools.func_system as SYS
@@ -113,7 +112,13 @@ class MAIN_WINDOW(QMainWindow):
     def ROW_DUPLICATE(self):
         '''
         '''
-        print("ROW_DUPLICATE")
+        currentRow = WG.TBL_DATA.currentRow()
+        index = WG.TBL_DATA.selectionModel().selectedIndexes()[0]
+        if index.isValid():
+            WG.TBL_DATA.insertRow(index.row()+1)
+            for col in range(WG.TBL_DATA.columnCount()):
+                value = QT.CELL_RD(WG.TBL_DATA, currentRow, col)
+                QT.CELL_WR(WG.TBL_DATA, currentRow+1, col, value)
 
     def ROW_DEL(self):
         '''
@@ -136,12 +141,6 @@ class MAIN_WINDOW(QMainWindow):
             return
         tbl_data = QT.TBL_GET_PANDAS_DF(WG.TBL_DATA)
         tbl_data.to_csv(os.path.join(self.reportPath, fileName),header=True, index=False)
-        # url = QUrl.fromLocalFile(os.getcwd())
-        # QDesktopServices.openUrl(url)
-        # filePath = QFileDialog.getOpenFileName(self)
-        # print(filePath)
-        # print("SAVE")
-        pass
 
 
 ''' INIT SCRIPT 
