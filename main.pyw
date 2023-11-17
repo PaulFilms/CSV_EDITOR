@@ -113,9 +113,8 @@ class MAIN_WINDOW(QMainWindow):
         '''
         '''
         currentRow = WG.TBL_DATA.currentRow()
-        index = WG.TBL_DATA.selectionModel().selectedIndexes()[0]
-        if index.isValid():
-            WG.TBL_DATA.insertRow(index.row()+1)
+        if not currentRow < 0:
+            WG.TBL_DATA.insertRow(currentRow+1)
             for col in range(WG.TBL_DATA.columnCount()):
                 value = QT.CELL_RD(WG.TBL_DATA, currentRow, col)
                 QT.CELL_WR(WG.TBL_DATA, currentRow+1, col, value)
