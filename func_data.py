@@ -6,11 +6,12 @@
 `WARNINGS:`
 \n
 '''
-__update__ = '2023.11.15'
+__update__ = '2023.11.20'
 __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 
 ''' SYSTEM LIBRARIES '''
 from dataclasses import dataclass, asdict, fields
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QPushButton, QTableWidget, QLineEdit
 
 ''' CUSTOM MAIN LIBRARIES '''
@@ -36,3 +37,6 @@ class WG:
     BTN_ADD: QPushButton
     BTN_DUPLICATE: QPushButton
     BTN_DEL: QPushButton
+    ## ICONS
+    ICO_APP: QIcon
+    ICO_INFO: QIcon

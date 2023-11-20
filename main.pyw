@@ -6,7 +6,7 @@
 \n
 `WARNINGS:`
 '''
-__version__ = '2023.11.17'
+__version__ = '2023.11.20'
 __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 __appName__ = 'CSV EDITOR'
 
@@ -14,7 +14,7 @@ __appName__ = 'CSV EDITOR'
 import os, sys
 import pandas as pd
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog
+from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
 from PyQt6.QtWidgets import QPushButton, QTableWidget, QLineEdit
 from PyQt6.QtGui import QIcon
 
@@ -26,14 +26,16 @@ import pydeveloptools.func_pyqt6 as QT
 from func_data import WG
 
 ''' GLOBAL VARIABLES '''
-uiFileName = r"main_GUI.ui"
+# from _data.main_GUI_ui import Ui_MainWindow
+
 
 ''' MAIN CLASS
     ---------- '''
 
 class MAIN_WINDOW(QMainWindow):
     def __init__(self) -> None:
-        super(MAIN_WINDOW, self).__init__()
+        # super(MAIN_WINDOW, self).__init__()
+        super().__init__()
         
         ## FOLDERS
         self.sysPath = os.getcwd()
@@ -48,14 +50,23 @@ class MAIN_WINDOW(QMainWindow):
             os.mkdir(self.reportPath)
 
         ## GUI .UI
+        uiFileName = r"main_GUI.ui"
         uiFile = os.path.join(self.dataPath, uiFileName)
         self.ui = uic.loadUi(uiFile, self)
 
+        '''
+        Formato .py con la GUI
+        Al iniciar la GUI con la variable self.ui es necesario llamar luego todos los widgets con self.ui.statusBar (por ejemplo)
+        Creo que es mas comodo hacer todo el proceso asi desde el principio y no seguir el metodo func_data WG.
+        '''
         ## GUI .PY
-        pass
+        # from _data.main_GUI_ui import Ui_MainWindow
+        # self.ui = Ui_MainWindow()
+        # self.ui.setupUi(self)
     
         ## GUI
-        self.statusbar.showMessage(f"version: {__version__}  |  login: {SYS.OS_GET_LOGIN()}")
+        WG.ICO_INFO = QIcon(os.path.join(self.dataPath, "info.ico"))
+        self.statusbar.showMessage(f"version: {__version__}  |  login: {SYS.OS_GET_LOGIN()}  |  author: pablogonzalezpila@gmail.com")
         
         ## CONNECTIONS
         WG.BTN_LOAD: QPushButton = self.btn_load
@@ -124,7 +135,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         currentRow = WG.TBL_DATA.currentRow()
         if currentRow < 0:
-            QT.INFOBOX("ATTENTIONS", "PLEASE, SELECT A VALID ROW")
+            QT.INFOBOX("ATTENTIONS", "PLEASE, SELECT A VALID ROW", WG.ICO_INFO)
             return
         WG.TBL_DATA.removeRow(currentRow)
 
@@ -133,7 +144,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         fileName = WG.TX_FILENAME.text()
         if fileName == None or fileName == "":
-            QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY")
+            QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY", WG.ICO_INFO)
             return
         fileName = f"{fileName}.csv"
         if not QT.YESNOBOX("SAVE TABLE", f"DO YOU WANT TO SAVE THE CURRENT TABLE LIKE <{fileName}> ?"):
