@@ -147,7 +147,7 @@ class MAIN_WINDOW(QMainWindow):
             QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY", WG.ICO_INFO)
             return
         fileName = f"{fileName}.csv"
-        if not QT.YESNOBOX("SAVE TABLE", f"DO YOU WANT TO SAVE THE CURRENT TABLE LIKE <{fileName}> ?"):
+        if not QT.YESNOBOX("SAVE TABLE", f"DO YOU WANT TO SAVE THE CURRENT TABLE LIKE <{fileName}> ?", WG.ICO_INFO):
             return
         tbl_data = QT.TBL_GET_PANDAS_DF(WG.TBL_DATA)
         tbl_data.to_csv(os.path.join(self.reportPath, fileName),header=True, index=False)
