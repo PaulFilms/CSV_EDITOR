@@ -161,9 +161,9 @@ if __name__ == "__main__":
     APP = QApplication(sys.argv)
     
     ## DARK MODE
-    import qdarktheme
-    qdarktheme.enable_hi_dpi()
-    qdarktheme.setup_theme(theme="dark", corner_shape="rounded")
+    # import qdarktheme
+    # qdarktheme.enable_hi_dpi()
+    # qdarktheme.setup_theme(theme="dark", corner_shape="rounded")
 
     ## GUI
     WINDOW = MAIN_WINDOW()
