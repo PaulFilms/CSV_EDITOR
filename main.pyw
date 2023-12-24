@@ -113,7 +113,7 @@ class MAIN_WINDOW(QMainWindow):
                 new_tbl_data[field] = tbl_data[field]
             if field not in fields:
                 new_tbl_data[field] = None
-        QT.TBL_POP_PANDAS_DF(WG.TBL_DATA, new_tbl_data, HEAD_ORDER=False)
+        QT.TBL_POP_PANDAS_DF(WG.TBL_DATA, new_tbl_data)
 
     def ROW_ADD(self):
         '''
