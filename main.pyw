@@ -101,7 +101,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         tbl_data = QT.TBL_GET_PANDAS_DF(WG.TBL_DATA)
         fields = tbl_data.columns.values.tolist()
-        FORM = QT.QLIST(
+        FORM = QT.QLIST_FORM(
             LIST=fields, 
             Window_Title="TABLE FIELDS"
             )
