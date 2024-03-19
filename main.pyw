@@ -94,7 +94,7 @@ class MAIN_WINDOW(QMainWindow):
         if fileName == None or fileName == "":
             return
         df = pd.read_csv(filePath[0])
-        QT.TBL_POP_PANDAS_DF(WG.TBL_DATA, df, HEAD_ORDER=False)
+        QT.TBL_POP_PANDAS_DF(WG.TBL_DATA, df)
     
     def FIELDS(self):
         '''
