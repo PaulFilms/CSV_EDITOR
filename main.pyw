@@ -1,12 +1,14 @@
-''' 
-# CSV EDITOR | MAIN
+''' CSV EDITOR | MAIN
 
-\n
-`TASK:`
-\n
-`WARNINGS:`
-'''
-__version__ = '2023.11.20'
+TASK:
+    - Usar dataclass o Enum para declarar los widgets
+
+WARNINGS:
+    - ...
+
+________________________________________________________________________________________________ '''
+
+__version__ = '2024.03.19'
 __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 __appName__ = 'CSV EDITOR'
 
@@ -30,7 +32,7 @@ from func_data import WG
 
 
 ''' MAIN CLASS
-    ---------- '''
+________________________________________________________________________________________________ '''
 
 class MAIN_WINDOW(QMainWindow):
     def __init__(self) -> None:
@@ -89,6 +91,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         '''
         filePath = QFileDialog.getOpenFileName(self, filter="*.csv;;All Files(*)")
+        self.reportPath = SYS.PATH_BASENAME.GET(filePath[0], SYS.PATH_BASENAME.PATH)
         fileName = os.path.basename(filePath[0].split(".")[0])
         WG.TX_FILENAME.setText(fileName)
         if fileName == None or fileName == "":
@@ -146,15 +149,25 @@ class MAIN_WINDOW(QMainWindow):
         if fileName == None or fileName == "":
             QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY", WG.ICO_INFO)
             return
-        fileName = f"{fileName}.csv"
-        if not QT.YESNOBOX("SAVE TABLE", f"DO YOU WANT TO SAVE THE CURRENT TABLE LIKE <{fileName}> ?", WG.ICO_INFO):
-            return
-        tbl_data = QT.TBL_GET_PANDAS_DF(WG.TBL_DATA)
-        tbl_data.to_csv(os.path.join(self.reportPath, fileName),header=True, index=False)
+        
+        # fileName = f"{fileName}.csv"
+        # if not QT.YESNOBOX("SAVE TABLE", f"DO YOU WANT TO SAVE THE CURRENT TABLE LIKE <{fileName}> ?", WG.ICO_INFO):
+        #     return
+
+        fileName, _ = QFileDialog.getSaveFileName(
+            None,
+            caption="Save As", 
+            directory=os.path.join(self.reportPath, fileName), 
+            filter="CSV Files (*.csv);;All Files (*)",
+            )
+        if fileName:
+            # print(fileName)
+            tbl_data = QT.TBL_GET_PANDAS_DF(WG.TBL_DATA)
+            tbl_data.to_csv(os.path.join(self.reportPath, fileName),header=True, index=False)
 
 
 ''' INIT SCRIPT 
-    ----------- '''
+________________________________________________________________________________________________ '''
 
 if __name__ == "__main__":
     ## APPLICATION
