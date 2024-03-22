@@ -2,13 +2,14 @@
 
 TASK:
     - Usar dataclass o Enum para declarar los widgets
+    - pyuic6 -o _data/main_GUI_ui.py _data/main_GUI.ui
 
 WARNINGS:
-    - ...
+    - Al compilar, el ejecutable no carga los iconos
 
 ________________________________________________________________________________________________ '''
 
-__version__ = '2024.03.19'
+__version__ = '2024.03.21'
 __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 __appName__ = 'CSV EDITOR'
 
@@ -25,10 +26,7 @@ import pydeveloptools.func_system as SYS
 import pydeveloptools.func_pyqt6 as QT
 
 ''' APP EXTENSIONS '''
-from func_data import WG
-
-''' GLOBAL VARIABLES '''
-# from _data.main_GUI_ui import Ui_MainWindow
+from _data.main_GUI_ui import Ui_MainWindow
 
 
 ''' MAIN CLASS
@@ -52,9 +50,13 @@ class MAIN_WINDOW(QMainWindow):
             os.mkdir(self.reportPath)
 
         ## GUI .UI
-        uiFileName = r"main_GUI.ui"
-        uiFile = os.path.join(self.dataPath, uiFileName)
-        self.ui = uic.loadUi(uiFile, self)
+        # uiFileName = r"main_GUI.ui"
+        # uiFile = os.path.join(self.dataPath, uiFileName)
+        # self.ui = uic.loadUi(uiFile, self)
+
+        ## GUI .PY FILE
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
 
         '''
         Formato .py con la GUI
@@ -66,26 +68,16 @@ class MAIN_WINDOW(QMainWindow):
         # self.ui = Ui_MainWindow()
         # self.ui.setupUi(self)
     
-        ## GUI
-        WG.ICO_INFO = QIcon(os.path.join(self.dataPath, "info.ico"))
-        self.statusbar.showMessage(f"version: {__version__}  |  login: {SYS.OS_GET_LOGIN()}  |  author: pablogonzalezpila@gmail.com")
-        
+        ## GUI / WIDGETS
+        self.ICO_INFO = QIcon(os.path.join(self.dataPath, "info.ico"))
+        self.ui.statusbar.showMessage(f"version: {__version__}  |  login: {SYS.OS_GET_LOGIN()}  |  author: pablogonzalezpila@gmail.com")
         ## CONNECTIONS
-        WG.BTN_LOAD: QPushButton = self.btn_load
-        WG.BTN_SAVE: QPushButton = self.btn_save
-        WG.TX_FILENAME: QLineEdit = self.tx_filename
-        WG.TBL_DATA: QTableWidget = self.tbl_data
-        WG.BTN_FIELDS: QPushButton = self.btn_fields
-        WG.BTN_ADD: QPushButton = self.btn_add
-        WG.BTN_DUPLICATE: QPushButton = self.btn_duplicate
-        WG.BTN_DEL: QPushButton = self.btn_del
-        # 
-        WG.BTN_LOAD.clicked.connect(self.LOAD)
-        WG.BTN_SAVE.clicked.connect(self.SAVE)
-        WG.BTN_FIELDS.clicked.connect(self.FIELDS)
-        WG.BTN_ADD.clicked.connect(self.ROW_ADD)
-        WG.BTN_DUPLICATE.clicked.connect(self.ROW_DUPLICATE)
-        WG.BTN_DEL.clicked.connect(self.ROW_DEL)
+        self.ui.btn_load.clicked.connect(self.LOAD)
+        self.ui.btn_save.clicked.connect(self.SAVE)
+        self.ui.btn_fields.clicked.connect(self.FIELDS)
+        self.ui.btn_add.clicked.connect(self.ROW_ADD)
+        self.ui.btn_duplicate.clicked.connect(self.ROW_DUPLICATE)
+        self.ui.btn_del.clicked.connect(self.ROW_DEL)
     
     def LOAD(self):
         '''
@@ -93,16 +85,16 @@ class MAIN_WINDOW(QMainWindow):
         filePath = QFileDialog.getOpenFileName(self, filter="*.csv;;All Files(*)")
         self.reportPath = SYS.PATH_BASENAME.GET(filePath[0], SYS.PATH_BASENAME.PATH)
         fileName = os.path.basename(filePath[0].split(".")[0])
-        WG.TX_FILENAME.setText(fileName)
+        self.ui.tx_filename.setText(fileName)
         if fileName == None or fileName == "":
             return
         df = pd.read_csv(filePath[0])
-        QT.TBL_POP_PANDAS_DF(WG.TBL_DATA, df)
+        QT.TBL_POP_PANDAS_DF(self.ui.tbl_data, df)
     
     def FIELDS(self):
         '''
         '''
-        tbl_data = QT.TBL_GET_PANDAS_DF(WG.TBL_DATA)
+        tbl_data = QT.TBL_GET_PANDAS_DF(self.ui.tbl_data)
         fields = tbl_data.columns.values.tolist()
         FORM = QT.QLIST_FORM(
             LIST=fields, 
@@ -116,38 +108,38 @@ class MAIN_WINDOW(QMainWindow):
                 new_tbl_data[field] = tbl_data[field]
             if field not in fields:
                 new_tbl_data[field] = None
-        QT.TBL_POP_PANDAS_DF(WG.TBL_DATA, new_tbl_data)
+        QT.TBL_POP_PANDAS_DF(self.ui.tbl_data, new_tbl_data)
 
     def ROW_ADD(self):
         '''
         '''
-        WG.TBL_DATA.setRowCount(WG.TBL_DATA.rowCount()+1)
+        self.ui.tbl_data.setRowCount(self.ui.tbl_data.rowCount()+1)
 
     def ROW_DUPLICATE(self):
         '''
         '''
-        currentRow = WG.TBL_DATA.currentRow()
+        currentRow = self.ui.tbl_data.currentRow()
         if not currentRow < 0:
-            WG.TBL_DATA.insertRow(currentRow+1)
-            for col in range(WG.TBL_DATA.columnCount()):
-                value = QT.CELL_RD(WG.TBL_DATA, currentRow, col)
-                QT.CELL_WR(WG.TBL_DATA, currentRow+1, col, value)
+            self.ui.tbl_data.insertRow(currentRow+1)
+            for col in range(self.ui.tbl_data.columnCount()):
+                value = QT.CELL_RD(self.ui.tbl_data, currentRow, col)
+                QT.CELL_WR(self.ui.tbl_data, currentRow+1, col, value)
 
     def ROW_DEL(self):
         '''
         '''
-        currentRow = WG.TBL_DATA.currentRow()
+        currentRow = self.ui.tbl_data.currentRow()
         if currentRow < 0:
-            QT.INFOBOX("ATTENTIONS", "PLEASE, SELECT A VALID ROW", WG.ICO_INFO)
+            QT.INFOBOX("ATTENTIONS", "PLEASE, SELECT A VALID ROW", self.ICO_INFO)
             return
-        WG.TBL_DATA.removeRow(currentRow)
+        self.ui.tbl_data.removeRow(currentRow)
 
     def SAVE(self):
         '''
         '''
-        fileName = WG.TX_FILENAME.text()
+        fileName = self.ui.tx_filename.text()
         if fileName == None or fileName == "":
-            QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY", WG.ICO_INFO)
+            QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY", self.ICO_INFO)
             return
         
         # fileName = f"{fileName}.csv"
@@ -162,7 +154,7 @@ class MAIN_WINDOW(QMainWindow):
             )
         if fileName:
             # print(fileName)
-            tbl_data = QT.TBL_GET_PANDAS_DF(WG.TBL_DATA)
+            tbl_data = QT.TBL_GET_PANDAS_DF(self.ui.tbl_data)
             tbl_data.to_csv(os.path.join(self.reportPath, fileName),header=True, index=False)
 
 

@@ -7,7 +7,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['main.pyw'],
+    ['CSV_EDITOR.pyw'],
     pathex=[],
     binaries=[],
     datas=[
