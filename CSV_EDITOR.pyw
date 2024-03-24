@@ -3,13 +3,14 @@
 TASK:
     - Usar dataclass o Enum para declarar los widgets
     - pyuic6 -o _data/main_GUI_ui.py _data/main_GUI.ui
+    - Quitar del archivo .ui los iconos para añadirlos por codigo, y revisar los translates
 
 WARNINGS:
     - Al compilar, el ejecutable no carga los iconos
 
 ________________________________________________________________________________________________ '''
 
-__version__ = '2024.03.21'
+__version__ = '2024.03.24'
 __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 __appName__ = 'CSV EDITOR'
 
@@ -58,19 +59,11 @@ class MAIN_WINDOW(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        '''
-        Formato .py con la GUI
-        Al iniciar la GUI con la variable self.ui es necesario llamar luego todos los widgets con self.ui.statusBar (por ejemplo)
-        Creo que es mas comodo hacer todo el proceso asi desde el principio y no seguir el metodo func_data WG.
-        '''
-        ## GUI .PY
-        # from _data.main_GUI_ui import Ui_MainWindow
-        # self.ui = Ui_MainWindow()
-        # self.ui.setupUi(self)
-    
         ## GUI / WIDGETS
         self.ICO_INFO = QIcon(os.path.join(self.dataPath, "info.ico"))
         self.ui.statusbar.showMessage(f"version: {__version__}  |  login: {SYS.OS_GET_LOGIN()}  |  author: pablogonzalezpila@gmail.com")
+        self.ui.btn_load.setIcon(QIcon(os.path.join(self.dataPath, "load.ico")))
+        self.ui.btn_save.setIcon(QIcon(os.path.join(self.dataPath, "save.ico")))
         ## CONNECTIONS
         self.ui.btn_load.clicked.connect(self.LOAD)
         self.ui.btn_save.clicked.connect(self.SAVE)
