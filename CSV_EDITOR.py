@@ -1,11 +1,13 @@
-''' CSV EDITOR
+'''
+CSV EDITOR
 
 TASK:
     - pyuic6 -o _data/main_GUI_ui.py _data/main_GUI.ui
+    - pyside6-uic -o _data/PySide_GUI.py _data/main_GUI.ui
     - pyarmor gen CSV_EDITOR.py _data
 
 WARNINGS:
-    - ...
+    - PyQt6 changed to PySide6, watch out for possible BUG(s) and Crashes 
 
 ________________________________________________________________________________________________ '''
 
@@ -16,17 +18,16 @@ __appName__ = 'CSV EDITOR'
 ''' SYSTEM LIBRARIES '''
 import os, sys
 import pandas as pd
-# from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
-from PyQt6.QtWidgets import QPushButton, QTableWidget, QLineEdit
-from PyQt6.QtGui import QIcon
+from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
+from PySide6.QtWidgets import QPushButton, QTableWidget, QLineEdit
+from PySide6.QtGui import QIcon, QFont
 
 ''' CUSTOM MAIN LIBRARIES '''
 import pydeveloptools.func_system as SYS
-import pydeveloptools.func_pyqt6 as QT
+import pydeveloptools.func_pyside6 as QT
 
 ''' APP EXTENSIONS '''
-from _data.main_GUI_ui import Ui_MainWindow
+from _data.PySide_GUI import Ui_MainWindow
 
 
 ''' MAIN CLASS
@@ -47,6 +48,7 @@ class MAIN_WINDOW(QMainWindow):
             self.basePath = os.path.abspath(".")
         self.dataPath = os.path.join(self.basePath, "_data")
         # REPORTS
+        self.reportPath = self.sysPath
         # self.reportPath = os.path.join(self.sysPath, 'REPORTS')
         # if not os.path.exists(self.reportPath): 
         #     os.mkdir(self.reportPath)
@@ -60,12 +62,19 @@ class MAIN_WINDOW(QMainWindow):
         self.ui.setupUi(self)
 
         ## GUI / WIDGETS
-        self.setWindowTitle("CSV EDITOR (by PABLO PILA / pablogonzalezpila@gmail.com)")
+        self.setWindowTitle("CSV Editor (by PABLO PILA)")
         self.setWindowIcon(QIcon(os.path.join(self.dataPath,'csv.ico')))
-        self.ui.statusbar.showMessage(f"version: {__version__}")
+        self.ui.statusbar.showMessage(f"version: {__version__} | pablogonzalezpila@gmail.com")
         self.ui.btn_load.setIcon(QIcon(os.path.join(self.dataPath, "load.ico")))
         self.ui.btn_save.setIcon(QIcon(os.path.join(self.dataPath, "save.ico")))
         self.ICO_INFO = QIcon(os.path.join(self.dataPath, "info.ico"))
+        TBL_HEADER = self.ui.tbl_data.horizontalHeader()
+        HEADER_FONT = QFont()
+        HEADER_FONT.setFamily("Arial Black")
+        HEADER_FONT.setPointSize(14)
+        # HEADER_FONT.setPixelSize(30)
+        # HEADER_FONT.setBold(True)
+        TBL_HEADER.setFont(HEADER_FONT)
         ## CONNECTIONS
         self.ui.btn_load.clicked.connect(self.LOAD)
         self.ui.btn_save.clicked.connect(self.SAVE)
@@ -140,12 +149,22 @@ class MAIN_WINDOW(QMainWindow):
             QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY", self.ICO_INFO)
             return
 
+        ## PyQt6
+        # fileName, _ = QFileDialog.getSaveFileName(
+        #     None,
+        #     caption="Save As", 
+        #     directory=os.path.join(self.reportPath, fileName), 
+        #     filter="CSV Files (*.csv);;All Files (*)",
+        #     )
+        
+        ## PySide6
         fileName, _ = QFileDialog.getSaveFileName(
-            None,
-            caption="Save As", 
-            directory=os.path.join(self.reportPath, fileName), 
-            filter="CSV Files (*.csv);;All Files (*)",
-            )
+            parent= None,
+            caption= "Save As", 
+            dir= os.path.join(self.reportPath, fileName), 
+            filter= "CSV Files (*.csv);;All Files (*)",
+        )
+
         if fileName:
             # print(fileName)
             tbl_data = QT.TBL_GET_PANDAS_DF(self.ui.tbl_data)
@@ -164,6 +183,33 @@ if __name__ == "__main__":
     import qdarktheme
     qdarktheme.enable_hi_dpi()
     qdarktheme.setup_theme(theme="dark", corner_shape="rounded")
+
+    # from PySide6.QtWidgets import QStyleFactory
+    # APP.setStyle(QStyleFactory.create("Fusion"))
+
+    # from qt_material import apply_stylesheet
+    # THEMES = [
+    #     'dark_amber.xml',
+    #     'dark_blue.xml',
+    #     'dark_cyan.xml',
+    #     'dark_lightgreen.xml',
+    #     'dark_pink.xml',
+    #     'dark_purple.xml',
+    #     'dark_red.xml',
+    #     'dark_teal.xml',
+    #     'dark_yellow.xml',
+    #     'light_amber.xml',
+    #     'light_blue.xml',
+    #     'light_cyan.xml',
+    #     'light_cyan_500.xml',
+    #     'light_lightgreen.xml',
+    #     'light_pink.xml',
+    #     'light_purple.xml',
+    #     'light_red.xml',
+    #     'light_teal.xml',
+    #     'light_yellow.xml'
+    # ]
+    # apply_stylesheet(APP, theme=THEMES[9])
 
     ## GUI
     WINDOW = MAIN_WINDOW()

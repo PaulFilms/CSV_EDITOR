@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>741</width>
-    <height>402</height>
+    <width>800</width>
+    <height>427</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -107,14 +107,14 @@
         <widget class="QPushButton" name="btn_load">
          <property name="minimumSize">
           <size>
-           <width>55</width>
-           <height>0</height>
+           <width>65</width>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>55</width>
-           <height>16777215</height>
+           <width>65</width>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -151,14 +151,14 @@
         <widget class="QPushButton" name="btn_save">
          <property name="minimumSize">
           <size>
-           <width>55</width>
-           <height>0</height>
+           <width>65</width>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>55</width>
-           <height>16777215</height>
+           <width>65</width>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -196,13 +196,13 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>37</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>37</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -211,8 +211,29 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+         <property name="whatsThis">
+          <string notr="true"/>
+         </property>
+         <property name="accessibleName">
+          <string notr="true"/>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
+         </property>
+         <property name="maxLength">
+          <number>100</number>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string notr="true"/>
          </property>
         </widget>
        </item>
@@ -242,6 +263,12 @@
       <property name="accessibleDescription">
        <string notr="true"/>
       </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::DragDrop</enum>
+      </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
       </property>
@@ -257,7 +284,25 @@
       <attribute name="horizontalHeaderVisible">
        <bool>true</bool>
       </attribute>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>40</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>200</number>
+      </attribute>
       <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>30</number>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>40</number>
+      </attribute>
+      <attribute name="verticalHeaderHighlightSections">
        <bool>false</bool>
       </attribute>
      </widget>
@@ -281,20 +326,20 @@
         <widget class="QPushButton" name="btn_fields">
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="font">
           <font>
            <family>Roboto Black</family>
-           <pointsize>10</pointsize>
+           <pointsize>12</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -325,20 +370,20 @@
         <widget class="QPushButton" name="btn_add">
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="font">
           <font>
            <family>Roboto Black</family>
-           <pointsize>10</pointsize>
+           <pointsize>12</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -369,20 +414,20 @@
         <widget class="QPushButton" name="btn_duplicate">
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="font">
           <font>
            <family>Roboto Black</family>
-           <pointsize>10</pointsize>
+           <pointsize>12</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -413,20 +458,20 @@
         <widget class="QPushButton" name="btn_del">
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>120</width>
-           <height>31</height>
+           <width>140</width>
+           <height>50</height>
           </size>
          </property>
          <property name="font">
           <font>
            <family>Roboto Black</family>
-           <pointsize>10</pointsize>
+           <pointsize>12</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -472,6 +517,12 @@
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar">
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
    <property name="toolTip">
     <string notr="true"/>
    </property>
