@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>888</width>
-    <height>452</height>
+    <width>741</width>
+    <height>402</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -121,7 +121,6 @@
           <font>
            <family>Roboto Black</family>
            <pointsize>14</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -142,10 +141,6 @@
          </property>
          <property name="text">
           <string notr="true"/>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>load.ico</normaloff>load.ico</iconset>
          </property>
          <property name="shortcut">
           <string notr="true"/>
@@ -170,7 +165,6 @@
           <font>
            <family>Roboto Black</family>
            <pointsize>14</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -191,10 +185,6 @@
          </property>
          <property name="text">
           <string notr="true"/>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>save.ico</normaloff>save.ico</iconset>
          </property>
          <property name="shortcut">
           <string notr="true"/>
@@ -270,16 +260,6 @@
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
-      <row>
-       <property name="text">
-        <string>New Row</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>New Row</string>
-       </property>
-      </row>
      </widget>
     </item>
     <item row="1" column="1">
@@ -315,7 +295,6 @@
           <font>
            <family>Roboto Black</family>
            <pointsize>10</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -360,7 +339,6 @@
           <font>
            <family>Roboto Black</family>
            <pointsize>10</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -405,7 +383,6 @@
           <font>
            <family>Roboto Black</family>
            <pointsize>10</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -450,7 +427,6 @@
           <font>
            <family>Roboto Black</family>
            <pointsize>10</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>

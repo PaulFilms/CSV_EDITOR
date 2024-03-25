@@ -3,3 +3,5 @@ pandas
 pydeveloptools @ git+https://github.com/PaulFilms/pydeveloptools.git
 markdown2
 PyQtDarkTheme @ git+https://github.com/PaulFilms/PyQtDarkTheme.git
+pyarmor
+pyinstaller

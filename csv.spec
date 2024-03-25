@@ -7,8 +7,8 @@ block_cipher = None
 
 
 a = Analysis(
-    ['CSV_EDITOR.pyw'],
-    pathex=[],
+    ['CSV_EDITOR.py'],
+    pathex=[r'C:\Users\GONZA_PA\Documents\_PRIVATE\_PROGRAMMING\CSV_EDITOR'],
     binaries=[],
     datas=[
         ('_data', '_data'),
@@ -32,7 +32,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='CSV_EDITOR v2024.03.24',
+    name='CSV_EDITOR',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
