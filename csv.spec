@@ -32,7 +32,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='CSV_EDITOR',
+    name='CSV_EDITOR v2024.03.24',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
