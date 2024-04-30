@@ -95,7 +95,7 @@ class MAIN_WINDOW(QMainWindow):
         FORM.setWindowIcon(QIcon(os.path.join(self.dataPath, "csv.ico")))
         FORM.exec()
         new_tbl_data = pd.DataFrame()
-        for field in FORM.value:
+        for field in FORM.data:
             if field in tbl_data.columns:
                 new_tbl_data[field] = tbl_data[field]
             if field not in fields:
@@ -122,7 +122,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         currentRow = self.ui.tbl_data.currentRow()
         if currentRow < 0:
-            QT.INFOBOX("ATTENTION", "PLEASE, SELECT A VALID ROW", self.ICO_INFO)
+            QT.INFOBOX(winTitle="ATTENTION", info="PLEASE, SELECT A VALID ROW", icon=self.ICO_INFO)
             return
         self.ui.tbl_data.removeRow(currentRow)
 
@@ -139,14 +139,14 @@ class MAIN_WINDOW(QMainWindow):
             df = pd.read_csv(filePath[0])
             QT.TBL_POP_PANDAS_DF(self.ui.tbl_data, df)
         except Exception as e:
-            QT.INFOBOX("ERROR !!", e, self.ICO_INFO)
+            QT.INFOBOX(winTitle="ERROR !!", info=e, icon=self.ICO_INFO)
 
     def SAVE(self):
         '''
         '''
         fileName = self.ui.tx_filename.text()
         if fileName == None or fileName == str():
-            QT.INFOBOX("ATTENTION", "THE FILE NAME IS EMPTY", self.ICO_INFO)
+            QT.INFOBOX(winTitle="ATTENTION", info="THE FILE NAME IS EMPTY", icon=self.ICO_INFO)
             return
 
         ## PyQt6

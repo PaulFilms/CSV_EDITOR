@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main_GUI.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.2
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -73,8 +73,8 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setContentsMargins(10, 10, 10, 10)
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.NoFrame)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.frame.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout = QGridLayout(self.frame)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setHorizontalSpacing(10)
@@ -84,7 +84,7 @@ class Ui_MainWindow(object):
         self.btn_load.setMinimumSize(QSize(65, 40))
         self.btn_load.setMaximumSize(QSize(65, 40))
         font1 = QFont()
-        font1.setFamilies([u"Roboto Black"])
+        font1.setFamilies([u"Tahoma"])
         font1.setPointSize(14)
         font1.setBold(True)
         self.btn_load.setFont(font1)
@@ -184,10 +184,10 @@ class Ui_MainWindow(object):
         self.tbl_data.setAccessibleDescription(u"")
 #endif // QT_CONFIG(accessibility)
         self.tbl_data.setDragEnabled(True)
-        self.tbl_data.setDragDropMode(QAbstractItemView.DragDrop)
+        self.tbl_data.setDragDropMode(QAbstractItemView.DragDropMode.DragDrop)
         self.tbl_data.setAlternatingRowColors(True)
         self.tbl_data.setShowGrid(True)
-        self.tbl_data.setGridStyle(Qt.SolidLine)
+        self.tbl_data.setGridStyle(Qt.PenStyle.SolidLine)
         self.tbl_data.setSortingEnabled(True)
         self.tbl_data.horizontalHeader().setVisible(True)
         self.tbl_data.horizontalHeader().setCascadingSectionResizes(False)
@@ -202,8 +202,8 @@ class Ui_MainWindow(object):
 
         self.frame_2 = QFrame(self.centralwidget)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.frame_2.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout = QVBoxLayout(self.frame_2)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, -1, 0, -1)
@@ -212,7 +212,7 @@ class Ui_MainWindow(object):
         self.btn_fields.setMinimumSize(QSize(140, 50))
         self.btn_fields.setMaximumSize(QSize(140, 50))
         font3 = QFont()
-        font3.setFamilies([u"Roboto Black"])
+        font3.setFamilies([u"Tahoma"])
         font3.setPointSize(12)
         font3.setBold(True)
         self.btn_fields.setFont(font3)
