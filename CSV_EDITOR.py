@@ -11,7 +11,7 @@ WARNINGS:
 
 ________________________________________________________________________________________________ '''
 
-__version__ = '2024.03.25'
+__version__ = '2024.12.16'
 __author__ = 'PABLO GONZALEZ PILA <pablogonzalezpila@gmail.com>'
 __appName__ = 'CSV EDITOR'
 
@@ -19,12 +19,13 @@ __appName__ = 'CSV EDITOR'
 import os, sys
 import pandas as pd
 from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
-from PySide6.QtWidgets import QPushButton, QTableWidget, QLineEdit
+# from PySide6.QtWidgets import QPushButton, QTableWidget, QLineEdit
 from PySide6.QtGui import QIcon, QFont
 
 ''' CUSTOM MAIN LIBRARIES '''
-import pydeveloptools.func_system as SYS
-import pydeveloptools.func_pyside6 as QT
+# import pydeveloptools.func_system as SYS
+import easypyside.widgets as QT
+from easypyside.forms import QLIST_FORM, INFOBOX
 
 ''' APP EXTENSIONS '''
 from _data.PySide_GUI import Ui_MainWindow
@@ -88,7 +89,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         tbl_data = QT.TBL_GET_PANDAS_DF(self.ui.tbl_data)
         fields = tbl_data.columns.values.tolist()
-        FORM = QT.QLIST_FORM(
+        FORM = QLIST_FORM(
             LIST=fields, 
             Window_Title="TABLE FIELDS"
             )
@@ -122,7 +123,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         currentRow = self.ui.tbl_data.currentRow()
         if currentRow < 0:
-            QT.INFOBOX(winTitle="ATTENTION", info="PLEASE, SELECT A VALID ROW", icon=self.ICO_INFO)
+            INFOBOX(winTitle="ATTENTION", info="PLEASE, SELECT A VALID ROW", icon=self.ICO_INFO)
             return
         self.ui.tbl_data.removeRow(currentRow)
 
@@ -130,7 +131,7 @@ class MAIN_WINDOW(QMainWindow):
         '''
         '''
         filePath = QFileDialog.getOpenFileName(self, filter="*.csv;;All Files(*)")
-        self.reportPath = SYS.PATH_BASENAME.GET(filePath[0], SYS.PATH_BASENAME.PATH)
+        self.reportPath = filePath[0].replace(os.path.basename(filePath[0]), '')
         fileName = os.path.basename(filePath[0].split(".")[0])
         self.ui.tx_filename.setText(fileName)
         if fileName == None or fileName == "":
@@ -139,14 +140,14 @@ class MAIN_WINDOW(QMainWindow):
             df = pd.read_csv(filePath[0])
             QT.TBL_POP_PANDAS_DF(self.ui.tbl_data, df)
         except Exception as e:
-            QT.INFOBOX(winTitle="ERROR !!", info=e, icon=self.ICO_INFO)
+            INFOBOX(winTitle="ERROR !!", info=e, icon=self.ICO_INFO)
 
     def SAVE(self):
         '''
         '''
         fileName = self.ui.tx_filename.text()
         if fileName == None or fileName == str():
-            QT.INFOBOX(winTitle="ATTENTION", info="THE FILE NAME IS EMPTY", icon=self.ICO_INFO)
+            INFOBOX(winTitle="ATTENTION", info="THE FILE NAME IS EMPTY", icon=self.ICO_INFO)
             return
 
         ## PyQt6

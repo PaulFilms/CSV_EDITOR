@@ -1,7 +1,6 @@
-# PyQt6
 PySide6
 pandas
-pydeveloptools @ git+https://github.com/PaulFilms/pydeveloptools.git
+EasyPySide @ git+https://github.com/PaulFilms/EasyPySide@main
 markdown2
 PyQtDarkTheme @ git+https://github.com/PaulFilms/PyQtDarkTheme.git
 pyarmor
